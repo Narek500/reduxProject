@@ -2,11 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const initialState = [
+    {id: Date.now().toString(), name: 'Item 1', status: false},
+    {id: Date.now().toString(), name: 'Item 2', status: false},
+    {id: Date.now().toString(), name: 'Item 3', status: false},
+]
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+function rootReducer (state = initialState) {
+    return state;
+}
+
+const store = createStore(rootReducer);
+
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+
 serviceWorker.unregister();
