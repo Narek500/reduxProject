@@ -11,7 +11,6 @@ function App() {
 
       <div className="container mt-5">
         <Index />
-narek 2001
       </div>
 
     </>
