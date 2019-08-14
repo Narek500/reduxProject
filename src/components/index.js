@@ -9,7 +9,7 @@ function Index(props) {
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
                 <td> <button className="btn btn-warning"> Not Done </button> </td>
-                <td> <button className="btn btn-danger"> Delete </button> </td>
+                <td> <button className="btn btn-danger" onClick={()=>props.deleteRow(item.name)}> Delete </button> </td>
             </tr>
         )
     })
@@ -55,4 +55,8 @@ const mapStateToProps = (state) => ({
   testStore: state 
 })
 
-export default connect(mapStateToProps)(Index);
+const mapDispatchToProps=dispatch=>({
+    deleteRow:(name)=>dispatch({type:'delete row',payload:name})
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Index);

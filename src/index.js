@@ -12,7 +12,10 @@ const initialState = [
     {id: Date.now().toString(), name: 'Item 3', status: false},
 ]
 
-function rootReducer (state = initialState) {
+function rootReducer (state = initialState,action) {
+    if(action.type==='delete row'){
+        return state.filter(e=>e.name!==action.payload)
+    }
     return state;
 }
 
