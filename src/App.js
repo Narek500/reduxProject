@@ -8,7 +8,7 @@ function App() {
     <>
 
       <Navbar />
-	200 123
+
       <div className="container mt-5">
         <Index />
       </div>
