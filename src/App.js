@@ -6,7 +6,7 @@ function App() {
     
   return (
     <>
-       7777
+       
       <Navbar />
 
       <div className="container mt-5">
