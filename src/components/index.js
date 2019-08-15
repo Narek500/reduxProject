@@ -3,12 +3,29 @@ import {connect} from 'react-redux';
 
 function Index(props) {
 
+    const statusFunc = (e) => {
+
+        if (props.testStore[e.target.id].status === true) {
+            props.testStore[e.target.id].status = false;
+        } else {
+            props.testStore[e.target.id].status = true;
+        }
+
+        props.poxelStatus(props.testStore);
+        
+    }
+
     const p1 = props.testStore.map((item, index) => {
         return (
             <tr key={index}>
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
-                <td> <button className="btn btn-warning"> Not Done </button> </td>
+                <td> 
+                    <button 
+                    className="btn btn-warning" id={index} onClick={statusFunc}> 
+                    {item.status === false ? "Narek" : "Narek true"} 
+                    </button> 
+                </td>
                 <td> <button className="btn btn-danger"> Delete </button> </td>
             </tr>
         )
@@ -53,6 +70,12 @@ function Index(props) {
 
 const mapStateToProps = (state) => ({
   testStore: state 
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    poxelStatus: (data) => {
+        dispatch({type: 'CHANGE_STATUS', payload: data})
+    }
 })
 
-export default connect(mapStateToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
