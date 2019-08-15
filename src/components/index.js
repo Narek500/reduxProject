@@ -4,15 +4,7 @@ import {connect} from 'react-redux';
 function Index(props) {
 
     const statusFunc = (e) => {
-
-        if (props.testStore[e.target.id].status === true) {
-            props.testStore[e.target.id].status = false;
-        } else {
-            props.testStore[e.target.id].status = true;
-        }
-
-        props.poxelStatus(props.testStore);
-        
+        props.poxelStatus(e.target.id);
     }
 
     const p1 = props.testStore.map((item, index) => {
@@ -23,12 +15,13 @@ function Index(props) {
         
                 <td>
                     <button 
-                    className="btn btn-warning" id={index} onClick={statusFunc}> 
-                    {item.status === false ? "Narek" : "Narek true"} 
+                    className={item.status === false ? "btn btn-warning" : "btn btn-success"}  
+                    id={item.id} onClick={statusFunc}> 
+                    {item.status === false ? "Not Done" : "Done"} 
                     </button> 
                 </td>
                 
-                <td> <button className="btn btn-danger" onClick={()=>props.deleteRow(item.name)}> Delete </button> </td>
+                <td> <button className="btn btn-danger" onClick={()=>props.deleteRow([item.name, item.status])}> Delete </button> </td>
             
             </tr>
         )
@@ -67,6 +60,7 @@ function Index(props) {
                 </tbody>
 
             </table>
+
         </>
     );
 }
@@ -76,10 +70,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+
     poxelStatus: (data) => {
         dispatch({type: 'CHANGE_STATUS', payload: data})
     },
-    deleteRow:(name)=>dispatch({type:'delete row',payload:name})
+
+    deleteRow:(name)=>dispatch({type:'DELETE_ROW',payload:name})
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
