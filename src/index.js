@@ -12,13 +12,16 @@ let initialState = [
     {id: Date.now().toString()+3, name: 'Item 3', status: false},
 ]
 
+
 function rootReducer (state = initialState, action) {
 
     if (action.type === 'CHANGE_STATUS') {
         console.log(action.payload);
         return action.payload;
+    } else if (action.type==='delete row') {
+        return state.filter(e=>e.name!==action.payload)
     }
-    
+
     return state;
 }
 

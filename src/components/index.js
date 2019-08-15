@@ -20,20 +20,23 @@ function Index(props) {
             <tr key={index}>
                 <th scope="row">{item.id}</th>
                 <td>{item.name}</td>
-                <td> 
+        
+                <td>
                     <button 
                     className="btn btn-warning" id={index} onClick={statusFunc}> 
                     {item.status === false ? "Narek" : "Narek true"} 
                     </button> 
                 </td>
-                <td> <button className="btn btn-danger"> Delete </button> </td>
+                
+                <td> <button className="btn btn-danger" onClick={()=>props.deleteRow(item.name)}> Delete </button> </td>
+            
             </tr>
         )
     })
 
     return (
         <>
-
+        
             <div className="input-group mb-3">
 
                 <input type="text" className="form-control" placeholder="Add New Todo" />
@@ -75,7 +78,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     poxelStatus: (data) => {
         dispatch({type: 'CHANGE_STATUS', payload: data})
-    }
+    },
+    deleteRow:(name)=>dispatch({type:'delete row',payload:name})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
