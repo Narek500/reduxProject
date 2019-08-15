@@ -13,10 +13,19 @@ const initialState = [
 ]
 
 function rootReducer (state = initialState,action) {
+     if(action.type==='add item'){
+        return[...state, action.payload]
+        }
+        if(action.type==='add id'){
+            return[...state, action.payload]
+            }
     if(action.type==='delete row'){
         return state.filter(e=>e.name!==action.payload)
     }
+    // return state;
+ 
     return state;
+
 }
 
 const store = createStore(rootReducer);

@@ -13,16 +13,20 @@ function Index(props) {
             </tr>
         )
     })
-
+let input;
     return (
         <>
 
             <div className="input-group mb-3">
 
-                <input type="text" className="form-control" placeholder="Add New Todo" />
+                <input type="text" className="form-control" placeholder="Add New Todo" ref={node => {
+              input = node;
+      }} />
 
                 <div className="input-group-append">
-                    <button className="btn btn-primary"> Add Todo </button>
+                    <button className="btn btn-primary" onClick={() => {
+          props.addItem({name:input.value, id: Date.now().toString()});
+        }}> Add Todo </button>
                 </div>
 
             </div>
@@ -56,7 +60,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps=dispatch=>({
-    deleteRow:(name)=>dispatch({type:'delete row',payload:name})
+    deleteRow:(name)=>dispatch({type:'delete row',payload:name}),
+    addItem:(name,id)=>dispatch({type:'add item',payload: name},{type:"add id", payload: id})
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Index);
