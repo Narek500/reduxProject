@@ -13,19 +13,6 @@ function Index(props) {
         props.poxelStatus(e.target.id);
     }
 
-    const fetchFUnc = () => {
-        fetch("http://web.webex.am/subjects",{
-            method: 'GET',
-            headers: {"Content-type": 'application/x-www-form-urlencoded', 'Accept': 'application/json'},
-        }).then((response) => {
-            return response.json();
-        }).then((response) => {
-            console.log(response, "sdsad");
-        }).catch((error) => {
-            console.log(error, "error e")
-        })
-    }
-
     const p1 = props.testStore.filter(e => (search ? e.name.match(new RegExp(`\\${search}`, 'g')) : true)).map((item, index) => {
         return (
             <tr key={index}>
@@ -71,7 +58,7 @@ let input;
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col" onClick={fetchFUnc}>Name</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Delete</th>
                     </tr>

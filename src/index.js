@@ -37,17 +37,20 @@ function rootReducer(state = initialState, action) {
                 return state;
             }
         })
-        else if(action.type==='add item'){
-          return[...state, action.payload]
-        }
-        else if(action.type==='add id'){
-           return[...state, action.payload]
-         }
-
+    
         return del;
 
     }
+    
+    else if(action.type==='add item'){
+        return[...state, action.payload]
+    }
+    
+    else if(action.type==='add id'){
+        return[...state, action.payload]
+    }
 
+    return state;
 }
 
 const store = createStore(rootReducer);
