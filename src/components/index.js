@@ -3,14 +3,27 @@ import { connect } from 'react-redux';
 
 function Index(props) {
 
-    const
-        [search, setSearch] = useState(''),
-        handleSearch = e => {
-            setSearch(e.target.value);
-        };
+    const [search, setSearch] = useState(''),
+    
+    handleSearch = e => {
+        setSearch(e.target.value);
+    };
 
     const statusFunc = (e) => {
         props.poxelStatus(e.target.id);
+    }
+
+    const fetchFUnc = () => {
+        fetch("http://web.webex.am/subjects",{
+            method: 'GET',
+            headers: {"Content-type": 'application/x-www-form-urlencoded', 'Accept': 'application/json'},
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            console.log(response, "sdsad");
+        }).catch((error) => {
+            console.log(error, "error e")
+        })
     }
 
     const p1 = props.testStore.filter(e => (search ? e.name.match(new RegExp(`\\${search}`, 'g')) : true)).map((item, index) => {
@@ -54,7 +67,7 @@ function Index(props) {
                 <thead>
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">Name</th>
+                        <th scope="col" onClick={fetchFUnc}>Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Delete</th>
                     </tr>
