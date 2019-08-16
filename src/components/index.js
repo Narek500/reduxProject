@@ -24,7 +24,7 @@ let input;
       }} />
 
                 <div className="input-group-append">
-                    <button className="btn btn-primary" onClick={() => {
+                    <button className="btn btn-primary " onClick={() => {
           props.addItem({name:input.value, id: Date.now().toString()});
         }}> Add Todo </button>
                 </div>
